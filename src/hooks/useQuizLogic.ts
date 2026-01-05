@@ -15,6 +15,7 @@ export const useQuizLogic = () => {
   const [quizMode, setQuizMode] = useState<QuizMode>("kanji-to-english");
   const [isQuizStarted, setIsQuizStarted] = useState(false);
   const [showModeSelector, setShowModeSelector] = useState(true);
+  const [timeLimit, setTimeLimit] = useState(60);
   const { toast } = useToast();
 
   const [visibleStats, setVisibleStats] = useState<string[]>([
@@ -22,6 +23,7 @@ export const useQuizLogic = () => {
     "score",
     "accuracy",
     "streak",
+    "timer",
   ]);
 
   const generateNewQuestion = () => {
@@ -71,9 +73,7 @@ export const useQuizLogic = () => {
   };
 
   const resetQuiz = () => {
-    setScore(0);
-    setQuestionNumber(0);
-    setStreak(0);
+    resetStats();
     setIsQuizStarted(true);
     generateNewQuestion();
   };
@@ -81,11 +81,16 @@ export const useQuizLogic = () => {
   const changeModeAndRestart = () => {
     setShowModeSelector(true);
     setIsQuizStarted(false);
+    resetStats();
+    setCurrentQuestion(null);
+    setOptions([]);
+  };
+
+  const resetStats = () => {
     setScore(0);
     setQuestionNumber(0);
     setStreak(0);
-    setCurrentQuestion(null);
-    setOptions([]);
+    setTimeLimit(60);
   };
 
   const handleTryAgain = () => {
@@ -114,6 +119,7 @@ export const useQuizLogic = () => {
     showModeSelector,
     isQuizCompleted,
     visibleStats,
+    timeLimit,
 
     // Actions
     setQuizMode,
@@ -124,5 +130,6 @@ export const useQuizLogic = () => {
     changeModeAndRestart,
     handleTryAgain,
     toggleStatVisibility,
+    setTimeLimit,
   };
 };
