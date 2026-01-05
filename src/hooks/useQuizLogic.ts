@@ -26,6 +26,9 @@ export const useQuizLogic = () => {
     "timer",
   ]);
 
+  const [isQuizCompleted, setIsQuizCompleted] = useState(false);
+  const [selectedTimeLimit, setSelectedTimeLimit] = useState(60);
+
   const generateNewQuestion = () => {
     const randomItems = getRandomVocabulary(4);
     const questionItem =
@@ -57,10 +60,7 @@ export const useQuizLogic = () => {
 
     // Check if quiz is complete
     if (newQuestionNumber >= questionLimit) {
-      setTimeout(() => {
-        setIsQuizStarted(false);
-        setShowModeSelector(false);
-      }, 300);
+      setIsQuizCompleted(true);
     } else {
       setTimeout(generateNewQuestion, 300);
     }
@@ -68,19 +68,24 @@ export const useQuizLogic = () => {
 
   const startQuiz = () => {
     setIsQuizStarted(true);
+    setIsQuizCompleted(false);
     setShowModeSelector(false);
+    setTimeLimit(selectedTimeLimit);
     generateNewQuestion();
   };
 
   const resetQuiz = () => {
     resetStats();
+    setIsQuizCompleted(false);
     setIsQuizStarted(true);
+    setTimeLimit(selectedTimeLimit);
     generateNewQuestion();
   };
 
   const changeModeAndRestart = () => {
     setShowModeSelector(true);
     setIsQuizStarted(false);
+    setIsQuizCompleted(false);
     resetStats();
     setCurrentQuestion(null);
     setOptions([]);
@@ -90,7 +95,6 @@ export const useQuizLogic = () => {
     setScore(0);
     setQuestionNumber(0);
     setStreak(0);
-    setTimeLimit(60);
   };
 
   const handleTryAgain = () => {
@@ -102,9 +106,6 @@ export const useQuizLogic = () => {
       prev.includes(stat) ? prev.filter((s) => s !== stat) : [...prev, stat]
     );
   };
-
-  // Check if quiz is completed
-  const isQuizCompleted = questionNumber >= questionLimit && !isQuizStarted;
 
   return {
     // State
@@ -120,6 +121,7 @@ export const useQuizLogic = () => {
     isQuizCompleted,
     visibleStats,
     timeLimit,
+    selectedTimeLimit,
 
     // Actions
     setQuizMode,
@@ -131,5 +133,6 @@ export const useQuizLogic = () => {
     handleTryAgain,
     toggleStatVisibility,
     setTimeLimit,
+    setSelectedTimeLimit,
   };
 };

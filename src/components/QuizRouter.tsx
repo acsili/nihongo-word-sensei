@@ -18,6 +18,7 @@ export const QuizRouter = () => {
     isQuizCompleted,
     visibleStats,
     timeLimit,
+    selectedTimeLimit,
     setQuizMode,
     setQuestionLimit,
     handleAnswer,
@@ -27,6 +28,7 @@ export const QuizRouter = () => {
     handleTryAgain,
     toggleStatVisibility,
     setTimeLimit,
+    setSelectedTimeLimit,
   } = useQuizLogic();
 
   if (isQuizCompleted) {
@@ -48,12 +50,12 @@ export const QuizRouter = () => {
         questionLimit={questionLimit}
         showModeSelector={showModeSelector}
         visibleStats={visibleStats}
-        timeLimit={timeLimit}
+        timeLimit={selectedTimeLimit}
         onModeChange={setQuizMode}
         onQuestionLimitChange={setQuestionLimit}
         onStartQuiz={startQuiz}
         onToggleStat={toggleStatVisibility}
-        onTimeLimitChange={setTimeLimit}
+        onTimeLimitChange={setSelectedTimeLimit}
       />
     );
   }
