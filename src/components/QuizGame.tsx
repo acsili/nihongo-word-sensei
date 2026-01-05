@@ -12,9 +12,11 @@ interface QuizGameProps {
   questionNumber: number;
   streak: number;
   visibleStats: string[];
+  timeLimit: number;
   onAnswer: (isCorrect: boolean) => void;
   onChangeMode: () => void;
   onReset: () => void;
+  setTimeLimit: (limit: number) => void;
 }
 
 export const QuizGame = ({
@@ -26,9 +28,11 @@ export const QuizGame = ({
   questionNumber,
   streak,
   visibleStats,
+  timeLimit,
   onAnswer,
   onChangeMode,
   onReset,
+  setTimeLimit,
 }: QuizGameProps) => {
   return (
     <div className="min-h-screen bg-gradient-subtle py-8 px-4">
@@ -47,6 +51,8 @@ export const QuizGame = ({
           }
           streak={streak}
           visibleStats={visibleStats}
+          timeLimit={timeLimit}
+          setTimeLimit={setTimeLimit}
         />
 
         {/* Quiz Card */}
