@@ -26,6 +26,14 @@ export const useQuizLogic = () => {
     "timer",
   ]);
 
+  const resetScroll = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  };
+
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [selectedTimeLimit, setSelectedTimeLimit] = useState(60);
 
@@ -72,6 +80,7 @@ export const useQuizLogic = () => {
     setShowModeSelector(false);
     setTimeLimit(selectedTimeLimit);
     generateNewQuestion();
+    resetScroll();
   };
 
   const resetQuiz = () => {
