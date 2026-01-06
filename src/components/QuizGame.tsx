@@ -31,7 +31,7 @@ export const QuizGame = ({
   onReset,
 }: QuizGameProps) => {
   return (
-    <div className="min-h-screen bg-gradient-subtle py-8 px-4">
+    <div className="bg-gradient-subtle py-8 px-4">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <QuizHeader onChangeMode={onChangeMode} onReset={onReset} />

@@ -59,7 +59,7 @@ export const QuizWelcome = ({
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-red-50/20 to-white">
+    <div className="bg-gradient-to-br from-white via-red-50/20 to-white">
       <div className="max-w-7xl mx-auto px-6 pt-12 lg:pt-5 pb-5">
         {/* Content */}
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-20 items-center">
