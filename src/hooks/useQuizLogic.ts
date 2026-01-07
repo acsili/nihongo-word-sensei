@@ -17,6 +17,9 @@ export const useQuizLogic = () => {
   const [showModeSelector, setShowModeSelector] = useState(true);
   const [timeLimit, setTimeLimit] = useState(60);
   const { toast } = useToast();
+  const [isTimeUp, setIsTimeUp] = useState(false);
+  const [isQuizCompleted, setIsQuizCompleted] = useState(false);
+  const [selectedTimeLimit, setSelectedTimeLimit] = useState(60);
 
   const [visibleStats, setVisibleStats] = useState<string[]>([
     "questionCounter",
@@ -33,9 +36,6 @@ export const useQuizLogic = () => {
       behavior: "auto",
     });
   };
-
-  const [isQuizCompleted, setIsQuizCompleted] = useState(false);
-  const [selectedTimeLimit, setSelectedTimeLimit] = useState(60);
 
   const generateNewQuestion = () => {
     const randomItems = getRandomVocabulary(4);
@@ -104,6 +104,7 @@ export const useQuizLogic = () => {
     setScore(0);
     setQuestionNumber(0);
     setStreak(0);
+    setIsTimeUp(false);
   };
 
   const handleTryAgain = () => {
@@ -114,6 +115,11 @@ export const useQuizLogic = () => {
     setVisibleStats((prev) =>
       prev.includes(stat) ? prev.filter((s) => s !== stat) : [...prev, stat]
     );
+  };
+
+  const handleTimeUp = () => {
+    setIsTimeUp(true);
+    setIsQuizCompleted(true);
   };
 
   return {
@@ -131,6 +137,7 @@ export const useQuizLogic = () => {
     visibleStats,
     timeLimit,
     selectedTimeLimit,
+    isTimeUp,
 
     // Actions
     setQuizMode,
@@ -143,5 +150,6 @@ export const useQuizLogic = () => {
     toggleStatVisibility,
     setTimeLimit,
     setSelectedTimeLimit,
+    handleTimeUp,
   };
 };

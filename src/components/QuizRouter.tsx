@@ -21,6 +21,7 @@ export const QuizRouter = () => {
     visibleStats,
     timeLimit,
     selectedTimeLimit,
+    isTimeUp,
     setQuizMode,
     setQuestionLimit,
     handleAnswer,
@@ -31,6 +32,7 @@ export const QuizRouter = () => {
     toggleStatVisibility,
     setTimeLimit,
     setSelectedTimeLimit,
+    handleTimeUp,
   } = useQuizLogic();
 
   const layout = (component: React.ReactNode) => (
@@ -44,17 +46,6 @@ export const QuizRouter = () => {
       <Footer />
     </>
   );
-
-  if (isQuizCompleted) {
-    return layout(
-      <QuizResults
-        score={score}
-        questionLimit={questionLimit}
-        onTryAgain={handleTryAgain}
-        onChangeMode={changeModeAndRestart}
-      />
-    );
-  }
 
   if (!isQuizStarted) {
     return layout(
@@ -85,10 +76,14 @@ export const QuizRouter = () => {
       streak={streak}
       visibleStats={visibleStats}
       timeLimit={timeLimit}
+      isTimeUp={isTimeUp}
+      isQuizCompleted={isQuizCompleted}
       onAnswer={handleAnswer}
       onChangeMode={changeModeAndRestart}
       onReset={resetQuiz}
       setTimeLimit={setTimeLimit}
+      onTryAgain={handleTryAgain}
+      onTimeUp={handleTimeUp}
     />
   );
 };

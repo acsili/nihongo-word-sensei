@@ -16,6 +16,7 @@ export const TimeLimitSelector = ({
     { value: 180, label: "3 minutes" },
     { value: 300, label: "5 minutes" },
     { value: 600, label: "10 minutes" },
+    { value: 2, label: "test" },
   ];
 
   return (

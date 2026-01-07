@@ -4,9 +4,14 @@ import { Timer } from "lucide-react";
 interface TimerProps {
   timeLimit: number;
   setTimeLimit: React.Dispatch<React.SetStateAction<number>>;
+  onTimeUp: () => void;
 }
 
-export const QuizTimer = ({ timeLimit, setTimeLimit }: TimerProps) => {
+export const QuizTimer = ({
+  timeLimit,
+  setTimeLimit,
+  onTimeUp,
+}: TimerProps) => {
   const [isTimerActive, setIsTimerActive] = useState(timeLimit > 0);
   const [initialTime, setInitialTime] = useState(timeLimit);
 
@@ -15,10 +20,6 @@ export const QuizTimer = ({ timeLimit, setTimeLimit }: TimerProps) => {
       setInitialTime(timeLimit);
     }
   }, [timeLimit, initialTime]);
-
-  const onTimeUp = () => {
-    console.log("Time's up!");
-  };
 
   const formatTime = (seconds: number) => {
     if (seconds <= 0) return "0:00";

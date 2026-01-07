@@ -12,6 +12,7 @@ interface ScoreDisplayProps {
   visibleStats: string[];
   timeLimit: number;
   setTimeLimit: (limit: number) => void;
+  onTimeUp: () => void;
 }
 
 export const ScoreDisplay = ({
@@ -22,6 +23,7 @@ export const ScoreDisplay = ({
   visibleStats,
   timeLimit,
   setTimeLimit,
+  onTimeUp,
 }: ScoreDisplayProps) => {
   const percentage =
     total > 0 && current > 1 ? Math.round((score / (current - 1)) * 100) : 0;
@@ -39,7 +41,13 @@ export const ScoreDisplay = ({
       <Accuracy percentage={percentage} getScoreColor={getScoreColor} />
     ),
     streak: <Streak streak={streak} />,
-    timer: <QuizTimer timeLimit={timeLimit} setTimeLimit={setTimeLimit} />,
+    timer: (
+      <QuizTimer
+        timeLimit={timeLimit}
+        setTimeLimit={setTimeLimit}
+        onTimeUp={onTimeUp}
+      />
+    ),
   };
 
   return (
